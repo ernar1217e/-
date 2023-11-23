@@ -1,3 +1,4 @@
+
 <template>
   <div class="fixed top-16 w-72">
     <Combobox v-model="selected">
@@ -20,10 +21,10 @@
           </ComboboxButton>
         </div>
         <TransitionRoot
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-          @after-leave="query = ''"
+         leave="transition ease-in duration-100" 
+         leaveFrom="opacity-100"
+         leaveTo="opacity-0"
+        
         >
           <ComboboxOptions
             class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
@@ -36,14 +37,14 @@
             </div>
 
             <ComboboxOption
-              v-for="person in filteredPeople"
-              as="template"
-              :key="person.id"
-              :value="person"
-              v-slot="{ selected, active }"
+            v-for="food in filteredFoods"
+             as="template"
+             :key="food.id"
+             :value="food"
+             v-slot="{ selected, active }"
             >
               <li
-                class="relative cursor-default select-none py-2 pl-10 pr-4"
+              class="relative cursor-default select-none py-2 pl-10 pr-4"
                 :class="{
                   'bg-teal-600 text-white': active,
                   'text-gray-900': !active,
@@ -53,7 +54,7 @@
                   class="block truncate"
                   :class="{ 'font-medium': selected, 'font-normal': !selected }"
                 >
-                  {{ person.name }}
+                 {{ food.name }}
                 </span>
                 <span
                   v-if="selected"
@@ -83,26 +84,26 @@ import {
 } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 
-const people = [
-  { id: 1, name: 'Wade Cooper' },
-  { id: 2, name: 'Arlene Mccoy' },
-  { id: 3, name: 'Devon Webb' },
-  { id: 4, name: 'Tom Cook' },
-  { id: 5, name: 'Tanya Fox' },
-  { id: 6, name: 'Hellen Schmidt' },
+const foods = [
+  { id: 1, name: 'Ролл филадельфия' },
+  { id: 2, name: 'Ясай тидзу' },
+  { id: 3, name: 'Киото' },
+  { id: 4, name: 'Чука маки' },
+  { id: 5, name: 'Калифорния' },
 ]
 
-let selected = ref(people[0])
+let selected = ref(foods[0])
 let query = ref('')
 
-let filteredPeople = computed(() =>
+let filteredFoods = computed(() =>
   query.value === ''
-    ? people
-    : people.filter((person) =>
-        person.name
+    ? foods
+    : foods.filter((food) =>
+        food.name
           .toLowerCase()
           .replace(/\s+/g, '')
           .includes(query.value.toLowerCase().replace(/\s+/g, ''))
       )
 )
+
 </script>
